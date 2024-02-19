@@ -10,7 +10,7 @@ body {
 }
 
 header {
-  background: #333;
+  background: #12b0a9;
   color: #fff;
   padding: 10px 0;
 }
@@ -18,6 +18,8 @@ header {
 header nav ul {
   list-style: none;
   float: right;
+  margin-top: 5px; /* Adjust the margin-top value as needed */
+  font-size: 19px
 }
 
 header nav ul li {
@@ -58,8 +60,24 @@ section {
 }
 
 footer {
-  background: #333;
-  color: #fff;
+  background: #12b0a9;
+  color: #000;
   text-align: center;
   padding: 10px 0;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 75px; /* Adjust the width as needed */
+  height: auto; /* Automatically adjust height to maintain aspect ratio */
+  margin-right: 5px; /* Add some spacing between the image and text */
+}
+
+.logo-text {
+  display: flex;
+  font-size: 24px
 }
