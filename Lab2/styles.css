@@ -85,3 +85,25 @@ footer {
   display: flex;
   font-size: 24px
 }
+
+#about .about-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.about-item {
+  flex-basis: 30%; /* Adjust the width of each item */
+}
+
+.about-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.about-item p {
+  text-align: center;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; /* Change the font family as desired */
+  font-size: 30px;
+}
