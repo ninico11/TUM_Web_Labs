@@ -99,7 +99,7 @@ footer {
 }
 
 .about-item {
-  flex-basis: 30%; /* Adjust the width of each item */
+  flex-basis: 30%;
 }
 
 .about-item img {
@@ -111,6 +111,14 @@ footer {
 
 .about-item p {
   text-align: center;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; /* Change the font family as desired */
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-size: 30px;
+}
+
+.contact-info {
+  margin-bottom: 20px;
+}
+
+.contact-info p {
+  margin-bottom: 10px;
 }
