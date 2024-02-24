@@ -12,6 +12,13 @@ body {
   padding: 20px 0;
 }
 
+h2 {
+  font-size: 30px;
+}
+
+h3 {
+  font-size: 22px;
+}
 header {
   background-image: url("images/start_back.jpg"); 
   background-size: cover; 
