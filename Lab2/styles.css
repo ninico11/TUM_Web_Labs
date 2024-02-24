@@ -1,4 +1,7 @@
 body {
+  background-image: url("images/background.jpg"); 
+  background-size: cover; 
+  background-position: center;
   margin: 0;
   font-family: Arial, sans-serif;
 }
@@ -10,15 +13,16 @@ body {
 }
 
 header {
-  background: #12b0a9;
-  color: #fff;
+  background-image: url("images/start_back.jpg"); 
+  background-size: cover; 
+  background-position: center;
   padding: 10px 0;
 }
 
 header nav ul {
   list-style: none;
   float: right;
-  margin-top: 5px; /* Adjust the margin-top value as needed */
+  margin-top: 5px;
   font-size: 19px
 }
 
@@ -33,7 +37,6 @@ header nav ul li a {
 }
 
 #hero {
-  background: #f4f4f4;
   text-align: center;
   padding: 100px 0;
 }
@@ -65,18 +68,19 @@ footer {
   text-align: center;
   padding: 10px 0;
 }
-
 .logo-container {
   display: flex;
   align-items: center;
 }
-
 .logo {
-  width: 75px; /* Adjust the width as needed */
-  height: auto; /* Automatically adjust height to maintain aspect ratio */
-  margin-right: 5px; /* Add some spacing between the image and text */
+  width: 75px; 
+  height: auto;
+  margin-right: 5px;
 }
-
+#contact textarea {
+  position: relative;
+  top: 7px;
+}
 .logo-text {
   display: flex;
   font-size: 24px
