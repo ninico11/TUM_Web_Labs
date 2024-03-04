@@ -122,3 +122,23 @@ footer {
 .contact-info p {
   margin-bottom: 10px;
 }
+
+.mascot {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 120px;
+  height: auto;
+  z-index: 999;
+  animation: floatMascot 2s ease-in-out infinite alternate; 
+}
+
+@keyframes floatMascot {
+  from {
+      transform: translateY(0);
+  }
+  to {
+      transform: translateY(-20px);
+  }
+}
+
