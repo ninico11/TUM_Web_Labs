@@ -35,14 +35,17 @@ header nav ul {
   display: flex; 
   justify-content: flex-end; 
 }
+/* 
+.navbar-toggler-icon {
+  color: #fff !important;
+} */
 
-header nav ul li {
-  margin-left: 20px;
+header nav ul li a.nav-link {
+  color: #fff !important;
 }
 
-header nav ul li a {
-  text-decoration: none;
-  color: #fff;
+header nav ul li a.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 #hero {
@@ -144,6 +147,14 @@ footer {
   height: auto;
   z-index: 999;
   animation: showMascot 2.5s ease-in-out forwards, floatMascot 2s ease-in-out infinite alternate;
+}
+
+.navbar {
+  background-color: transparent !important;
+}
+
+#about {
+  background-color: transparent !important;
 }
 
 .message {
