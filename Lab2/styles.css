@@ -30,11 +30,13 @@ header nav ul {
   list-style: none;
   float: right;
   margin-top: 5px;
-  font-size: 19px
+  font-size: 19px;
+  max-width: 300px; 
+  display: flex; 
+  justify-content: flex-end; 
 }
 
 header nav ul li {
-  display: inline;
   margin-left: 20px;
 }
 
@@ -163,6 +165,10 @@ footer {
   display: block;
   bottom: 180px; 
   right: 40px;
+}
+
+.mascot-container:hover .message {
+  display: block;
 }
 
 @keyframes floatMascot {
