@@ -1,7 +1,9 @@
 import argparse
-import requests
+import socket
 from bs4 import BeautifulSoup
 import json
+import ssl
+
 
 # File to store cache data
 CACHE_FILE = "cache.json"
@@ -24,34 +26,80 @@ def print_cache():
         print(f"Data: {data}")
         print("---------------------------------------")
 
-def make_request(url, content_type='html'):
+def make_request(url, content_type='html', depth=0):
     if url in cache:
         return cache[url]
+    # Extract host and path from URL
+    url_parts = url.split('/')
+    host, path = url_parts[2], '/' + '/'.join(url_parts[3:])
 
-    response = requests.get(url)
-    try:
-        if content_type == 'json':
-            data = response.json()
-        else:
-            soup = BeautifulSoup(response.text, 'html.parser')
-            data = soup.get_text()
-    except ValueError:
-        # If JSON decoding fails, treat the response as HTML
-        soup = BeautifulSoup(response.text, 'html.parser')
+    # Create a TCP socket
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        # Wrap the socket with SSL/TLS context
+        context = ssl.create_default_context()
+        with context.wrap_socket(s, server_hostname=host) as ssl_socket:
+            # Connect to the server
+            ssl_socket.connect((host, 443))
+
+            # Construct HTTP request
+            request = f"GET {path} HTTP/1.1\r\nHost: {host}\r\n\r\n"
+
+            # Send the request
+            ssl_socket.sendall(request.encode())
+
+            # Receive response
+            response = b""
+            while True:
+                data = ssl_socket.recv(4096)
+                if not data:
+                    break
+                response += data
+
+    # Decode response
+    response_text = response.decode("latin-1")
+
+    # Extract content based on content type
+    if content_type == 'json':
+        # Assuming JSON content is returned directly
+        data = json.loads(response_text.split('\r\n\r\n', 1)[1])
+    else:
+        # Extracting HTML content
+        soup = BeautifulSoup(response_text.split('\r\n\r\n', 1)[1], 'html.parser')
         data = soup.get_text()
     cache[url] = data
     save_cache()
     return data
 
+
 def search(term):
-    search_url = f"https://www.google.md/search?q={term}"
-    response = requests.get(search_url)
-    soup = BeautifulSoup(response.text, 'html.parser')
+    # Prepare the search query
+    query = f"GET /search?q={term} HTTP/1.1\r\nHost: www.google.com\r\n\r\n"
+
+    # Create a TCP socket
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.connect(("www.google.com", 80))
+
+        # Send the request
+        s.sendall(query.encode())
+
+        # Receive response
+        response = b""
+        while True:
+            data = s.recv(4096)
+            if not data:
+                break
+            response += data
+
+    # Decode response
+    response_text = response.decode("latin-1")
+
+    # Extract relevant information from the response
+    soup = BeautifulSoup(response_text.split('\r\n\r\n', 1)[1], 'html.parser')
     print("\nTop 10 Responses\n---------------------------------------------------------------------")
-    # Extract top 10 results and print them
     for i, result in enumerate(soup.find_all('a')[16:26], start=1):
         print(f"{i}. {result.text} - {result['href']}")
         print("---------------------------------------------------------------------")
+
         
 def main():
     parser = argparse.ArgumentParser(description="CLI program for making HTTP requests and displaying responses")
