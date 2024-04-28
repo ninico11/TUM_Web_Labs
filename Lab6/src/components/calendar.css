@@ -5,3 +5,12 @@
 a {
     color: #212529 !important;
 }
+
+.dark-theme {
+    background-color: #212529;
+    color: #fff;
+  }
+
+.dark-theme a {
+    color: #fff !important;
+}

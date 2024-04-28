@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Fullcalendar from "@fullcalendar/react";
+// import Calendar from "@fullcalendar/react";
+// import calendarEl from "@fullcalendar/react";
+// import getEventById from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -10,9 +13,25 @@ import * as bootstrap from "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./calendar.css";
 
-function Calendar() {
+// var calendar = new Calendar(calendarEl, {
+//   timeZone: 'UTC',
+//   events: [
+//     {
+//       id: 'a',
+//       title: 'my event',
+//       start: '2018-09-01'
+//     }
+//   ]
+// })
+
+// var event = calendar.getEventById('a') // an event object!
+// var start = event.start // a property (a Date object)
+// console.log(start.toISOString()) // "2018-09-01T00:00:00.000Z"
+
+function CalendarS() {
+  const [isDarkTheme, setIsDarkTheme] = useState(true);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [events, setEvents] = useState([]); // Initialize events from local storage
+  const [events, setEvents] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newEvent, setNewEvent] = useState({
     title: "",
@@ -66,6 +85,18 @@ function Calendar() {
     handleOpen();
   };
 
+  const toggleTheme = () => {
+    setIsDarkTheme(!isDarkTheme);
+
+    // Apply CSS classes based on the theme state
+    const calendarContainer = document.getElementById("calendar");
+    if (isDarkTheme) {
+      calendarContainer.classList.add("dark-theme");
+    } else {
+      calendarContainer.classList.remove("dark-theme");
+    }
+  };
+
   const style = {
     position: "absolute",
     top: "50%",
@@ -79,7 +110,7 @@ function Calendar() {
   };
 
   return (
-    <div>
+    <div id="calendar">
       <Fullcalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView={"dayGridMonth"}
@@ -104,7 +135,9 @@ function Calendar() {
 
       {/* Add Event Button */}
       <Button onClick={handleOpen}>Add Event</Button>
-
+      <Button onClick={toggleTheme}>
+        {isDarkTheme ? "Light Theme" : "Dark Theme"}
+      </Button>
       <Modal
         open={isModalOpen}
         onClose={handleClose}
@@ -144,4 +177,4 @@ function Calendar() {
 );
 }
 
-export default Calendar;
+export default CalendarS;
