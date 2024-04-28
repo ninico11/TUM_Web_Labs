@@ -1,9 +1,10 @@
-import logo from './logo.svg';
-import Calendar from './components/Calendar';
+import Calendar from "./components/Calendar";
 
 function App() {
   return (
-    <Calendar />
+    <div className="App">
+      <Calendar />
+    </div>
   );
 }
 
